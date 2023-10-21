@@ -1,6 +1,5 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
-from joblib import dump, load
 from sklearn.metrics import classification_report, accuracy_score
 from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV, cross_val_score
@@ -23,14 +22,6 @@ class BaseModel:
     def evaluate(self, y_test, y_pred):
         print(classification_report(y_test, y_pred))
         print("Accuracy:", accuracy_score(y_test, y_pred))
-
-    def save_model(self, filename):
-         dump(self.model, filename)
-         print(f"{type(self.model).__name__} model saved to xgboost_model.jolib")
-
-    def save_model(self, filename):
-         dump(self.model, filename)
-         print(f"{type(self.model).__name__} model saved to random_forest_model.joblibb")
 
     def bet_recommendation(self, probabilities):
         threshold_recommended = 0.7  # Modify as needed
@@ -95,10 +86,6 @@ if __name__ == "__main__":  # This ensures the code below is only executed if th
 
     rf_model.train(X_train, y_train)
     xgb_model.train(X_train, y_train)
-
-  # Save models after training 
-    xgb_model.save_model("trained_models/xgboost_model.joblib")
-    rf_model.save_model("trained_models/random_forest_model.joblib")
    
     # Use MatchPredictor to make predictions with RandomForest
     rf_predictor = MatchPredictor(rf_model)
