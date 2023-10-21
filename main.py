@@ -1,5 +1,6 @@
 import pandas as pd
-import logging  # Import for logging
+import os
+import logging
 from data_loader import load_data
 from data_preprocessing import preprocess_data
 from feature_extraction import extract_features
@@ -22,7 +23,8 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
         logging.info("--------------------------------------------------")
         
         # Save the model after training
-        model_instance.save_model(f"{model_name}_saved_model.pkl")
+        model_path = os.path.join("trained_models", f"{model_name}_saved_model.pkl")
+        model_instance.save_model(model_path)
 
         # Store the results for analysis
         results.append({
